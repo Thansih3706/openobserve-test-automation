@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aquanow-rfq-api-tests"
+version = "1.0.0"
+description = "API automation test suite for Aquanow RFQ trade endpoints"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+    {name = "Automation Team"},
+]
+dependencies = [
+    "pytest==8.3.5",
+    "requests==2.32.3",
+    "python-dotenv==1.0.1",
+    "allure-pytest==2.15.0",
+    "pytest-html==4.1.1",
+    "pytest-timeout==2.4.0",
+    "pytest-metadata==3.1.1",
+    "pytest-asyncio==1.2.0",
+    "respx==0.22.0",
+    "requests-mock==1.12.1",
+]
+
+[tool.pytest.ini_options]
+addopts = "-v -ra"
+testpaths = ["src/test/aquanow/tests"]
+pythonpath = ["."]
+markers = [
+    "smoke: critical happy-path scenarios",
+    "regression: broader lifecycle and business-rule tests",
+    "negative: invalid input and failure-path tests",
+    "rfq: RFQ trade tests",
+]
