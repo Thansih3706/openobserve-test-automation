@@ -18,7 +18,7 @@ The framework is designed for easy setup, fast execution, and minimal configurat
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/thansihkp-tech/aquanow_exercise.git
+git clone https://github.com/Thansih3706/aquanow_exercise.git
 cd aquanow_exercise
 ```
 
