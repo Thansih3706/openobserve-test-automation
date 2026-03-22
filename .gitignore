@@ -55,3 +55,11 @@ build/
 *.tmp
 *.swp
 *.swo
+
+__pycache__/
+*.pyc
+.DS_Store
+allure-results/
+reports/
+venv/
+.env
