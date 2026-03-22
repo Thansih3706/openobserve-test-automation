@@ -4,18 +4,18 @@
 .vscode/
 **/.vscode/
 
-# Env / secrets
-.env
-**/.env
-.env.*
-**/.env.*
-!.env.example
-.venv/
-**/.venv/
-venv/
-**/venv/
-env/
-**/env/
+# # Env / secrets
+# .env
+# **/.env
+# .env.*
+# **/.env.*
+# !.env.example
+# .venv/
+# **/.venv/
+# venv/
+# **/venv/
+# env/
+# **/env/
 
 # Python cache
 __pycache__/
