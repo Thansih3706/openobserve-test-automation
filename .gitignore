@@ -62,4 +62,4 @@ __pycache__/
 allure-results/
 reports/
 venv/
-.env
+
