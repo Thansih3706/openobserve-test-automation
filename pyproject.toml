@@ -31,6 +31,5 @@ pythonpath = ["."]
 markers = [
     "smoke: critical happy-path scenarios",
     "regression: broader lifecycle and business-rule tests",
-    "negative: invalid input and failure-path tests",
-    "rfq: RFQ trade tests",
+    "negative: invalid input and failure-path tests"
 ]
