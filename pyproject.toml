@@ -3,9 +3,9 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "aquanow-rfq-api-tests"
+name = "openobserve-rfq-api-tests"
 version = "1.0.0"
-description = "API automation test suite for Aquanow RFQ trade endpoints"
+description = "OpenObserve test automation suite for API and UI workflows"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [
@@ -26,7 +26,7 @@ dependencies = [
 
 [tool.pytest.ini_options]
 addopts = "-v -ra"
-testpaths = ["src/test/aquanow/tests"]
+testpaths = ["src/main/openobserve/api_tests/tests"]
 pythonpath = ["."]
 markers = [
     "smoke: critical happy-path scenarios",

@@ -1,65 +1,44 @@
 # OS / IDE
 .DS_Store
-**/.DS_Store
 .vscode/
-**/.vscode/
 
-# # Env / secrets
-# .env
-# **/.env
-# .env.*
-# **/.env.*
-# !.env.example
-# .venv/
-# **/.venv/
-# venv/
-# **/venv/
-# env/
-# **/env/
+# Secrets and local env files
+.env
+.env.*
+!.env.example
 
-# Python cache
+# Python environments and caches
+.venv/
+venv/
+env/
 __pycache__/
-**/__pycache__/
 *.py[cod]
-**/*.py[cod]
 .pytest_cache/
-**/.pytest_cache/
 
-# Test artifacts / reports (ANYWHERE)
-allure-results/
-**/allure-results/
-allure-report/
-**/allure-report/
-reports/
-**/reports/
-logs/
-**/logs/
-screenshots/
-**/screenshots/
-
-# Optional: Allure HTML output
-**/reports/html/
-
-# Coverage
+# Python build artifacts
+build/
+dist/
+*.egg-info/
 .coverage
 coverage.xml
 htmlcov/
 
-# Build / packaging
-dist/
-build/
-*.egg-info/
+# Test/report artifacts
+allure-results/
+allure-report/
+reports/
+logs/
+screenshots/
+test-results/
+playwright-report/
 
-# Temp files
+# Node / Playwright
+node_modules/
+src/main/openobserve/ui-tests/node_modules/
+
+# Temp/editor files
 *.log
 *.tmp
 *.swp
 *.swo
-
-__pycache__/
-*.pyc
-.DS_Store
-allure-results/
-reports/
-venv/
 

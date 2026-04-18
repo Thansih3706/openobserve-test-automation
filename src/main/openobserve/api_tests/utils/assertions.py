@@ -1,4 +1,4 @@
-from src.main.aquanow.utils.helper import get_data, quote_id_from_response, response_type
+from src.main.openobserve.utils.helper import get_data, quote_id_from_response, response_type
 
 
 def assert_common_quote_success_contract(body, data, expected, expected_response_type):

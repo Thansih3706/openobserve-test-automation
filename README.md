@@ -1,141 +1,99 @@
-# Aquanow RFQ API Automation Exercise
+# OpenObserve Test Automation
 
-## Overview
+This repository contains automated tests for OpenObserve:
+- API tests with `pytest` + `allure`
+- UI tests with `Playwright`
 
-This project provides automated API test coverage for Aquanow RFQ trade endpoints, validating core workflows such as quote creation, execution, expiry, and error handling.
+## Project Layout
 
-The framework is designed for easy setup, fast execution, and minimal configuration, while maintaining strong test structure and scalability.
+```text
+src/main/openobserve/
+  api_tests/      # Python API tests
+  ui-tests/       # Playwright UI tests
+```
 
 ## Prerequisites
 
-- Python 3.7 or higher
-- pip (Python package manager)
-- Git
-- Virtual environment support
+- Python 3.11+
+- Node.js 18+
+- `pip` and `npm`
+- OpenObserve instance running and reachable
 
-## Getting Started
+## Environment Variables
 
-### 1. Clone the Repository
+Use `.env.example` files as templates:
 
-```bash
-git clone https://github.com/Thansih3706/aquanow_exercise.git
-cd aquanow_exercise
-```
+- Root API template: `.env.example`
+- UI template: `src/main/openobserve/ui-tests/.env.example`
 
-### 2. Setup Environment
+Required variables:
 
-Create and activate a virtual environment:
+- API tests: `OO_USERNAME`, `OO_PASSWORD` (optional overrides: `OO_BASE_URL`, `OO_ORG`)
+- UI tests: `USERNAME`, `PASSWORD`
+
+## API Tests (Pytest)
+
+1) Install dependencies:
 
 ```bash
 python3 -m venv venv
-source venv/bin/activate   # On Windows: venv\Scripts\activate
-```
-
-### 3. Install Dependencies
-
-```bash
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Configuration
-
-Update  `.env` file in the project root directory with your API credentials:
-
-```
-API_KEY=your_api_key_here
-API_SECRET=your_api_secret_here
-BASE_URL=https://api-dev.aquanow.io
-ACCOUNT_ID=your_account_id_here
-```
-
-## How to Execute
-
-### Run Full Test Suite
+Set API env vars (from root):
 
 ```bash
-python run_suites.py
+cp .env.example .env
+# Fill OO_USERNAME and OO_PASSWORD in .env
 ```
 
-### Run Specific Tests
-
-To run only specific tests, update the `run_suites.py` file to specify which test modules or test cases you want to execute. The file contains configuration options to select test suites.
-
-### Run with Allure Reporting
-
-Generate detailed HTML reports using Allure:
+2) Run tests:
 
 ```bash
-pytest --alluredir=reports/allure-results
-allure serve reports/allure-results
+pytest src/main/openobserve/api_tests/tests -v
 ```
 
-The Allure report will open in your default browser showing detailed test results, history, and analytics.
-
-## Test Coverage
-
-### RFQ Operations
-
-#### RFQ Quote
-- Get quote (positive & negative scenarios)
-- Create quote (positive, negative, validation cases)
-- Quantity precedence validation (based on observed behavior)
-
-#### RFQ Execute
-- Successful execution
-- Expired quote behavior
-- Invalid quote ID handling
-- Duplicate execution prevention
-- Unauthorized execution
-
-#### RFQ Expire
-- Successful expiry
-- Expiring already expired quote
-- Execute after expiry validation
-
-### Authentication Tests
-- Missing authentication
-- Invalid API key / signature
-- Missing headers (API key, signature, nonce)
-- Replay / stale nonce scenarios (best-effort based on API behavior)
-
-## Reporting
-
-Allure is used for comprehensive test reporting. After running tests with the `--alluredir` flag, reports are generated in the `reports/allure-results` directory.
-
-**View the report:**
+3) Run with Allure output:
 
 ```bash
-allure serve reports/allure-results
+pytest src/main/openobserve/api_tests/tests --alluredir=allure-results -v
+allure serve allure-results
 ```
 
-HTML reports are also generated in `reports/html/` for easy sharing and archival.
+## UI Tests (Playwright)
 
-## Project Structure
+1) Install UI dependencies:
 
-```
-.
-├── src/
-│   ├── main/aquanow/
-│   │   └── utils/              # API client, authentication, helpers, config
-│   └── test/aquanow/
-│       └── tests/              # Test cases
-├── resources/
-│   └── testdata/               # Test data and fixtures
-├── reports/                    # Test reports (Allure & HTML)
-├── allure-results/             # Allure result data
-├── run_suites.py               # Test runner entry point
-├── test_runner.py              # Additional test runner utilities
-├── requirements.txt            # Python dependencies
-├── pytest.ini                  # Pytest configuration
-├── pyproject.toml              # Project metadata
-└── README.md                   # This file
+```bash
+cd src/main/openobserve/ui-tests
+npm install
 ```
 
-## Troubleshooting
+2) Configure UI `.env` inside `src/main/openobserve/ui-tests`.
 
-### Common Issues
+```bash
+cp src/main/openobserve/ui-tests/.env.example src/main/openobserve/ui-tests/.env
+# Fill USERNAME and PASSWORD in ui-tests/.env
+```
 
-- **ModuleNotFoundError**: Ensure virtual environment is activated and dependencies are installed with `pip install -r requirements.txt`
-- **Authentication Errors**: Verify `.env` file exists in the project root with correct credentials
-- **Allure Report Not Generating**: Ensure Allure is installed via `requirements.txt` and the `--alluredir` path exists
-- **Connection Timeout**: Check BASE_URL in `.env` file is correct and network connectivity is available
+3) Run tests:
+
+```bash
+npx playwright test
+```
+
+## Environment Notes
+
+- API fixtures read credentials from environment variables in `src/main/openobserve/api_tests/conftest.py`.
+- UI tests read credentials/settings from `src/main/openobserve/ui-tests/.env`.
+
+## Useful Commands
+
+```bash
+# API smoke only
+pytest src/main/openobserve/api_tests/tests -m smoke -v
+
+# UI single spec
+npx playwright test tests/pipeline.spec.js
+```
