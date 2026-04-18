@@ -3,9 +3,9 @@
 .vscode/
 
 # Secrets and local env files
-.env
-.env.*
-!.env.example
+# .env
+# .env.*
+# !.env.example
 
 # Python environments and caches
 .venv/
